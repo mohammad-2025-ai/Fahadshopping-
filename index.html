@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FahadShopping - Bestest in the World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #ff9900;
+            --secondary: #146eb4;
+            --dark: #232f3e;
+            --light: #fafafa;
+            --gray: #f0f2f2;
+            --text: #0f1111;
+        }
+        
+        body {
+            background-color: var(--gray);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--dark);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 24px;
+            text-decoration: none;
+        }
+        
+        .logo i {
+            font-size: 28px;
+        }
+        
+        .search-container {
+            flex: 1;
+            display: flex;
+            max-width: 800px;
+        }
+        
+        .search-container select {
+            background-color: #e6e6e6;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            padding: 10px;
+            outline: none;
+            cursor: pointer;
+        }
+        
+        .search-container input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+        
+        .search-container button {
+            background-color: var(--primary);
+            border: none;
+            border-radius: 0 5px 5px 0;
+            padding: 0 20px;
+            cursor: pointer;
+            color: var(--dark);
+            font-weight: bold;
+        }
+        
+        .nav-right {
+            display: flex;
+            gap: 20px;
+            color: white;
+            align-items: center;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            font-size: 14px;
+        }
+        
+        .nav-item span:first-child {
+            font-size: 12px;
+        }
+        
+        .nav-item span:last-child {
+            font-weight: bold;
+        }
+        
+        .cart {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        /* Navigation Bar */
+        .nav-bar {
+            background-color: #37475a;
+            padding: 8px 20px;
+            display: flex;
+            gap: 20px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .nav-bar a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1534452203293-494d7ddbf7e0?ixlib=rb-4.0.3') no-repeat center center;
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+        
+        .cta-button {
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cta-button:hover {
+            background-color: #e68a00;
+            transform: scale(1.05);
+        }
+        
+        /* Products Section */
+        .products-section {
+            padding: 30px 20px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .product-image img {
+            max-width: 100%;
+            max-height: 160px;
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+            height: 40px;
+            overflow: hidden;
+        }
+        
+        .product-rating {
+            color: var(--primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .product-price {
+            font-weight: bold;
+            font-size: 20px;
+            color: var(--text);
+            margin-bottom: 15px;
+        }
+        
+        .buy-button {
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            width: 100%;
+            padding: 8px;
+            font-weight: bold;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .buy-button:hover {
+            background-color: #e68a00;
+        }
+        
+        /* Become Seller Section */
+        .become-seller {
+            background-color: var(--secondary);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .become-seller h2 {
+            margin-bottom: 15px;
+        }
+        
+        .become-seller p {
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+        
+        .whatsapp-button {
+            background-color: #25D366;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            margin-top: auto;
+        }
+        
+        .footer-top {
+            background-color: #37475a;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .footer-top:hover {
+            background-color: #485769;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .footer-contact {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #3a4553;
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .made-by {
+            margin-top: 10px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .close-button:hover {
+            color: #333;
+        }
+        
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .submit-button {
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .submit-button:hover {
+            background-color: #e68a00;
+        }
+        
+        .info-text {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+            }
+            
+            .logo {
+                order: 1;
+            }
+            
+            .nav-right {
+                order: 2;
+                margin-left: auto;
+            }
+            
+            .search-container {
+                order: 3;
+                width: 100%;
+                margin-top: 10px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .nav-bar {
+                overflow-x: auto;
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <a href="#" class="logo">
+            <i class="fas fa-shopping-bag"></i>
+            <span>fahadshopping</span>
+        </a>
+        
+        <div class="search-container">
+            <select>
+                <option>All</option>
+                <option>Electronics</option>
+                <option>Home</option>
+                <option>Fashion</option>
+            </select>
+            <input type="text" placeholder="Search fahadshopping">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        
+        <div class="nav-right">
+            <div class="nav-item">
+                <span>Deliver to</span>
+                <span>Afghanistan</span>
+            </div>
+            
+            <div class="nav-item">
+                <span>Hello, Sign in</span>
+                <span>Account & Lists</span>
+            </div>
+            
+            <div class="nav-item">
+                <span>Returns</span>
+                <span>& Orders</span>
+            </div>
+            
+            <a href="#" class="cart">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Cart</span>
+                <span class="count">0</span>
+            </a>
+        </div>
+    </header>
+    
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <a href="#"><i class="fas fa-bars"></i> All</a>
+        <a href="#">Today's Deals</a>
+        <a href="#">Customer Service</a>
+        <a href="#">Registry</a>
+        <a href="#">Gift Cards</a>
+        <a href="#">Sell</a>
+        <a href="#">Local Delivery</a>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to FahadShopping</h1>
+        <p>Bestest online shopping experience in Afghanistan with cash on delivery at your apartment</p>
+        <button class="cta-button">Start Shopping</button>
+    </section>
+    
+    <!-- Products Section -->
+    <section class="products-section">
+        <h2 class="section-title"><i class="fas fa-fire"></i> Popular Products</h2>
+        <div class="products-grid">
+            <!-- Products will be added by admin through WhatsApp -->
+            <div class="no-products">
+                <p>No products available yet. Sellers can add products by contacting us on WhatsApp!</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Become Seller Section -->
+    <section class="become-seller">
+        <h2>Want to sell on FahadShopping?</h2>
+        <p>If you want to add products or become a seller, please contact us via WhatsApp with the message:</p>
+        <p><strong>"hello I want to be a seller/add products"</strong></p>
+        <button class="whatsapp-button" onclick="contactWhatsApp()">
+            <i class="fab fa-whatsapp"></i> Contact on WhatsApp: 0786076144
+        </button>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-top">
+            Back to top
+        </div>
+        
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Get to Know Us</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press Releases</a></li>
+                    <li><a href="#">FahadShopping Science</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Connect with Us</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Make Money with Us</h3>
+                <ul>
+                    <li><a href="#">Sell on FahadShopping</a></li>
+                    <li><a href="#">Become an Affiliate</a></li>
+                    <li><a href="#">Advertise Your Products</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <div class="footer-contact">
+                    <div><i class="fas fa-envelope"></i> mailkzaifahad@gmail.com</div>
+                    <div><i class="fas fa-phone"></i> 0786076144</div>
+                    <div><i class="fas fa-map-marker-alt"></i> Serving all Afghanistan</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>© 2023 FahadShopping. All rights reserved. Designed for customers in Afghanistan only.</p>
+            <p class="made-by">Made by fahadweb</p>
+        </div>
+    </footer>
+    
+    <!-- Buy Modal -->
+    <div id="buyModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2>Complete Your Purchase</h2>
+            <p>Please provide your WhatsApp number. We will contact you to arrange delivery and payment at your apartment.</p>
+            
+            <div class="form-group">
+                <label for="whatsappNumber">Your WhatsApp Number</label>
+                <input type="tel" id="whatsappNumber" placeholder="Enter your WhatsApp number">
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Delivery Address</label>
+                <input type="text" id="address" placeholder="Enter your full address">
+            </div>
+            
+            <button class="submit-button" onclick="placeOrder()">Place Order</button>
+            
+            <p class="info-text">Payment will be collected in cash when we deliver to your apartment</p>
+        </div>
+    </div>
+    
+    <script>
+        // Open buy modal
+        function openBuyModal() {
+            document.getElementById('buyModal').style.display = 'flex';
+        }
+        
+        // Close modal
+        function closeModal() {
+            document.getElementById('buyModal').style.display = 'none';
+        }
+        
+        // Place order function
+        function placeOrder() {
+            const number = document.getElementById('whatsappNumber').value;
+            const address = document.getElementById('address').value;
+            
+            if(!number || !address) {
+                alert('Please enter your WhatsApp number and address');
+                return;
+            }
+            
+            alert(`Thank you! We've received your order. We will contact you shortly at ${number} to arrange delivery to ${address}. Payment will be collected at your apartment.`);
+            closeModal();
+        }
+        
+        // Contact WhatsApp
+        function contactWhatsApp() {
+            const message = encodeURIComponent("hello I want to be a seller/add products");
+            window.open(`https://wa.me/93786076144?text=${message}`, '_blank');
+        }
+        
+        // Close modal if clicked outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('buyModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+        
+        // Add event listener to buy buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            // This would be added when products are available
+            // const buyButtons = document.querySelectorAll('.buy-button');
+            // buyButtons.forEach(button => {
+            //     button.addEventListener('click', openBuyModal);
+            // });
+        });
+    </script>
+</body>
+</html>
